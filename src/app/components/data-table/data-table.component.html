@@ -1,0 +1,108 @@
+<div class="table-container">
+  <!-- Header con búsqueda -->
+  <div class="table-header">
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="🔍 Buscar por nombre, email o rol..."
+        [(ngModel)]="searchTerm"
+        (input)="filterData()"
+      >
+      <span class="total-records">{{ filteredUsers.length }} registros encontrados</span>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th (click)="sortData('id')" [class.active]="sortField === 'id'">
+            ID {{ sortField === 'id' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('name')" [class.active]="sortField === 'name'">
+            Nombre {{ sortField === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('email')" [class.active]="sortField === 'email'">
+            Email {{ sortField === 'email' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('role')" [class.active]="sortField === 'role'">
+            Rol {{ sortField === 'role' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('status')" [class.active]="sortField === 'status'">
+            Estado {{ sortField === 'status' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('joinDate')" [class.active]="sortField === 'joinDate'">
+            Fecha Ingreso {{ sortField === 'joinDate' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+          <th (click)="sortData('salary')" [class.active]="sortField === 'salary'">
+            Salario {{ sortField === 'salary' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>{{ user.id }}</td>
+          <td class="name-cell">{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td><span class="role-badge">{{ user.role }}</span></td>
+          <td>
+            <span 
+              class="status-badge"
+              [class.status-active]="user.status === 'active'"
+              [class.status-inactive]="user.status === 'inactive'"
+            >
+              {{ user.status === 'active' ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+          <td>{{ formatDate(user.joinDate) }}</td>
+          <td class="salary-cell">{{ user.salary | currency:'USD':'symbol':'1.0-0' }}</td>
+        </tr>
+        
+        <tr *ngIf="filteredUsers.length === 0">
+          <td colspan="7" class="no-data">
+            <div class="no-data-content">
+              <span>📭</span>
+              <p>No se encontraron resultados para "{{ searchTerm }}"</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination" *ngIf="filteredUsers.length > 0">
+    <div class="page-info">
+      Mostrando <strong>{{ filteredUsers.length }}</strong> registros
+    </div>
+    
+    <div class="pagination-controls">
+      <button 
+        class="page-btn prev-next" 
+        (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 1"
+      >
+        ← Anterior
+      </button>
+      
+      <button 
+        *ngFor="let page of pages" 
+        class="page-btn"
+        [class.active]="page === currentPage"
+        (click)="changePage(page)"
+      >
+        {{ page }}
+      </button>
+      
+      <button 
+        class="page-btn prev-next" 
+        (click)="changePage(currentPage + 1)"
+        [disabled]="currentPage === totalPages"
+      >
+        Siguiente →
+      </button>
+    </div>
+  </div>
+</div>
