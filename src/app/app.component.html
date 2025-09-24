@@ -1,14 +1,20 @@
-<div class="app-container">
-  <header class="app-header">
-    <h1>Mi Aplicación Angular 19</h1>
-    <p>Tabla de usuarios con funcionalidades completas</p>
+<div class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow flex items-center justify-between px-6 py-3">
+    <div class="flex items-center space-x-2">
+      <div class="bg-blue-600 text-white font-bold px-2 py-1 rounded">RRTO</div>
+      <span class="text-gray-700 font-medium">Sistema Rarito</span>
+    </div>
   </header>
-  
-  <main class="app-main">
-    <app-data-table></app-data-table>
-  </main>
 
-  <footer class="app-footer">
-    <p>© 2024 Mi aplicación Angular. Todos los derechos reservados.</p>
-  </footer>
+  <!-- Body -->
+  <div class="flex flex-1 bg-gray-50">
+    <!-- Sidebar dinámico -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Workspace dinámico -->
+    <main class="flex-1 p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

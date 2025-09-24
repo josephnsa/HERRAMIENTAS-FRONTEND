@@ -1,108 +1,45 @@
-<div class="table-container">
-  <!-- Header con búsqueda -->
-  <div class="table-header">
-    <div class="search-container">
-      <input
-        type="text"
-        class="search-input"
-        placeholder="🔍 Buscar por nombre, email o rol..."
-        [(ngModel)]="searchTerm"
-        (input)="filterData()"
-      >
-      <span class="total-records">{{ filteredUsers.length }} registros encontrados</span>
-    </div>
-  </div>
+<div class="p-6 space-y-6">
+  <section class="bg-white shadow-sm rounded-md p-4">
+    <h2 class="text-base font-medium mb-3">Resultados de la Búsqueda</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead class="border-b">
+          <tr class="text-left text-gray-600">
+            <th class="px-3 py-2">ID</th>
+            <th class="px-3 py-2">Seguro</th>
+            <th class="px-3 py-2">Placa</th>
+            <th class="px-3 py-2">Marca</th>
+            <th class="px-3 py-2">Modelo</th>
+            <th class="px-3 py-2">Año</th>
+            <th class="px-3 py-2">Serie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of filteredVehiculos" class="hover:bg-gray-50 text-gray-700">
+            <td class="px-3 py-2 border-b">{{ v.vehiculoId }}</td>
+            <td class="px-3 py-2 border-b">{{ v.seguroId }}</td>
+            <td class="px-3 py-2 border-b">{{ v.placa }}</td>
+            <td class="px-3 py-2 border-b">{{ v.marca }}</td>
+            <td class="px-3 py-2 border-b">{{ v.modelo }}</td>
+            <td class="px-3 py-2 border-b">{{ v.anio }}</td>
+            <td class="px-3 py-2 border-b">{{ v.numeroSerie }}</td>
+          </tr>
 
-  <!-- Tabla -->
-  <div class="table-wrapper">
-    <table class="table">
-      <thead>
-        <tr>
-          <th (click)="sortData('id')" [class.active]="sortField === 'id'">
-            ID {{ sortField === 'id' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('name')" [class.active]="sortField === 'name'">
-            Nombre {{ sortField === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('email')" [class.active]="sortField === 'email'">
-            Email {{ sortField === 'email' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('role')" [class.active]="sortField === 'role'">
-            Rol {{ sortField === 'role' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('status')" [class.active]="sortField === 'status'">
-            Estado {{ sortField === 'status' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('joinDate')" [class.active]="sortField === 'joinDate'">
-            Fecha Ingreso {{ sortField === 'joinDate' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-          <th (click)="sortData('salary')" [class.active]="sortField === 'salary'">
-            Salario {{ sortField === 'salary' ? (sortDirection === 'asc' ? '↑' : '↓') : '' }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of paginatedUsers">
-          <td>{{ user.id }}</td>
-          <td class="name-cell">{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td><span class="role-badge">{{ user.role }}</span></td>
-          <td>
-            <span 
-              class="status-badge"
-              [class.status-active]="user.status === 'active'"
-              [class.status-inactive]="user.status === 'inactive'"
-            >
-              {{ user.status === 'active' ? 'Activo' : 'Inactivo' }}
-            </span>
-          </td>
-          <td>{{ formatDate(user.joinDate) }}</td>
-          <td class="salary-cell">{{ user.salary | currency:'USD':'symbol':'1.0-0' }}</td>
-        </tr>
-        
-        <tr *ngIf="filteredUsers.length === 0">
-          <td colspan="7" class="no-data">
-            <div class="no-data-content">
-              <span>📭</span>
-              <p>No se encontraron resultados para "{{ searchTerm }}"</p>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          <tr *ngIf="filteredVehiculos.length === 0">
+            <td colspan="7" class="px-3 py-4 text-center text-gray-500">
+              No se encontraron vehículos
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- Paginación -->
-  <div class="pagination" *ngIf="filteredUsers.length > 0">
-    <div class="page-info">
-      Mostrando <strong>{{ filteredUsers.length }}</strong> registros
+    <div class="flex justify-between items-center mt-3 text-sm text-gray-600">
+      <span>Total: {{ filteredVehiculos.length }} registros</span>
+      <div class="flex items-center space-x-1">
+        <button class="px-2 py-1 border rounded hover:bg-gray-100">«</button>
+        <button class="px-2 py-1 border rounded hover:bg-gray-100">»</button>
+      </div>
     </div>
-    
-    <div class="pagination-controls">
-      <button 
-        class="page-btn prev-next" 
-        (click)="changePage(currentPage - 1)"
-        [disabled]="currentPage === 1"
-      >
-        ← Anterior
-      </button>
-      
-      <button 
-        *ngFor="let page of pages" 
-        class="page-btn"
-        [class.active]="page === currentPage"
-        (click)="changePage(page)"
-      >
-        {{ page }}
-      </button>
-      
-      <button 
-        class="page-btn prev-next" 
-        (click)="changePage(currentPage + 1)"
-        [disabled]="currentPage === totalPages"
-      >
-        Siguiente →
-      </button>
-    </div>
-  </div>
+  </section>
 </div>
