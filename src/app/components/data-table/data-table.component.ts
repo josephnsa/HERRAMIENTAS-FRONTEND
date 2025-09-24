@@ -19,18 +19,7 @@ export class DataTableComponent implements OnInit {
   constructor(private vehiculosService: VehiculosService) {}
 
   ngOnInit() {
-    this.loadVehiculos();
   }
 
-  loadVehiculos() {
-    this.vehiculosService.consultarTodos().subscribe({
-      next: (data) => {
-        this.vehiculos = data;
-        this.filteredVehiculos = [...this.vehiculos];
-      },
-      error: (err) => {
-        console.error('Error al cargar vehículos', err);
-      }
-    });
-  }
+
 }

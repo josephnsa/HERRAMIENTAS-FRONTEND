@@ -12,4 +12,5 @@ export const routes: Routes = [
   { path: 'Consultar-todos', component: DataTableComponent, data: { title: 'Consultar todos' } as AppRouteData },
   { path: 'crear', component: CrearComponent, data: { title: 'Crear' } as AppRouteData },
   { path: 'consultar', component: ConsultarComponent, data: { title: 'Consultar' } as AppRouteData },
+
 ];

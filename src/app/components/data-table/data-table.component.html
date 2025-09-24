@@ -16,13 +16,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let v of filteredVehiculos" class="hover:bg-gray-50 text-gray-700">
-            <td class="px-3 py-2 border-b">{{ v.vehiculoId }}</td>
-            <td class="px-3 py-2 border-b">{{ v.seguroId }}</td>
-            <td class="px-3 py-2 border-b">{{ v.placa }}</td>
-            <td class="px-3 py-2 border-b">{{ v.marca }}</td>
-            <td class="px-3 py-2 border-b">{{ v.modelo }}</td>
-            <td class="px-3 py-2 border-b">{{ v.anio }}</td>
-            <td class="px-3 py-2 border-b">{{ v.numeroSerie }}</td>
+
           </tr>
 
           <tr *ngIf="filteredVehiculos.length === 0">
