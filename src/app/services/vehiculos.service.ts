@@ -25,7 +25,9 @@ export class VehiculosService {
     return this.api.put<Vehiculo>(ENDPOINTS.vehiculos.actualizar, data);
   }
 
- eliminar(id: number): Observable<void> {
-  return this.api.delete<void>(ENDPOINTS.vehiculos.eliminar(id)); // ✔ funciona
-}
+  eliminar(id: number) {
+    const body = { vehiculoId: id };
+    return this.api.deleteWithBody('/Vehiculos/Eliminar', body);
+  }
+
 }

@@ -9,7 +9,7 @@ export class ApiCoreService {
 
   private baseUrl = environment.apiUrl; // Ej: 'https://localhost:7200/api'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private getHttpOptions(isJson: boolean = true): { headers: HttpHeaders } {
     let headers = new HttpHeaders();
@@ -29,7 +29,10 @@ export class ApiCoreService {
     return this.http.put<T>(`${this.baseUrl}${endpoint}`, body, this.getHttpOptions());
   }
 
-  delete<T>(endpoint: string): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}${endpoint}`, this.getHttpOptions());
+  deleteWithBody<T>(endpoint: string, body: any): Observable<T> {
+    return this.http.request<T>('delete', `${this.baseUrl}${endpoint}`, {
+      ...this.getHttpOptions(),
+      body
+    });
   }
 }

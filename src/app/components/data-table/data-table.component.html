@@ -1,39 +1,62 @@
-<div class="p-6 space-y-6">
+<div class="ui-g">
+  <div style="margin-bottom: 20px;">
+    <p-menubar [model]="items"> </p-menubar>
+  </div>
+
   <section class="bg-white shadow-sm rounded-md p-4">
     <h2 class="text-base font-medium mb-3">Resultados de la Búsqueda</h2>
     <div class="overflow-x-auto">
-      <table class="min-w-full text-sm">
-        <thead class="border-b">
-          <tr class="text-left text-gray-600">
-            <th class="px-3 py-2">ID</th>
-            <th class="px-3 py-2">Seguro</th>
-            <th class="px-3 py-2">Placa</th>
-            <th class="px-3 py-2">Marca</th>
-            <th class="px-3 py-2">Modelo</th>
-            <th class="px-3 py-2">Año</th>
-            <th class="px-3 py-2">Serie</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let v of filteredVehiculos" class="hover:bg-gray-50 text-gray-700">
+      <p-table [value]="filteredVehiculos" [columns]="cols" [(selection)]="selectedVehiculo" selectionMode="single"
+        dataKey="vehiculoId" paginator="true" [rows]="5">
 
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">{{ col.header }}</th>
           </tr>
-
-          <tr *ngIf="filteredVehiculos.length === 0">
-            <td colspan="7" class="px-3 py-4 text-center text-gray-500">
-              No se encontraron vehículos
-            </td>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-columns="columns">
+          <tr [pSelectableRow]="row">
+            <td *ngFor="let col of columns">{{ row[col.field] }}</td>
           </tr>
-        </tbody>
-      </table>
+        </ng-template>
+      </p-table>
     </div>
 
     <div class="flex justify-between items-center mt-3 text-sm text-gray-600">
       <span>Total: {{ filteredVehiculos.length }} registros</span>
-      <div class="flex items-center space-x-1">
-        <button class="px-2 py-1 border rounded hover:bg-gray-100">«</button>
-        <button class="px-2 py-1 border rounded hover:bg-gray-100">»</button>
-      </div>
     </div>
   </section>
-</div>
+
+  <p-dialog header="Regitrar Vehiculo" [modal]="true" [(visible)]="Modalvisible" [style]="{width: '25rem'}">
+    <form [formGroup]="vehiculoForm" class="p-fluid">
+      <span class="p-text-secondary block mb-8">Ingresar datos del Vehiculo</span>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="SeguroID" class="font-semibold w-24">SeguroID</label>
+        <input pInputText id="seguroId" formControlName="seguroId" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-8">
+        <label for="placa" class="font-semibold w-24">Placa</label>
+        <input pInputText id="placa" formControlName="placa" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="marca" class="font-semibold w-24">Marca</label>
+        <input pInputText id="marca" formControlName="marca" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="modelo" class="font-semibold w-24">Modelo</label>
+        <input pInputText id="modelo" formControlName="modelo" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="anio" class="font-semibold w-24">Año</label>
+        <input pInputText id="anio" formControlName="anio" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="numeroSerie" class="font-semibold w-24">Numero de serie</label>
+        <input pInputText id="numeroSerie" formControlName="numeroSerie" class="flex-auto" autocomplete="off" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="Modalvisible = false"></p-button>
+        <p-button label="Guardar" (click)="registrarVehiculo()" [disabled]="vehiculoForm.invalid"></p-button>
+      </div>
+    </form>
+  </p-dialog>

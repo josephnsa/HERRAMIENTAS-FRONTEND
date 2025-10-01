@@ -32,7 +32,7 @@ import { PasswordModule } from "primeng/password";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DatePickerModule } from "primeng/datepicker";
 import { AccordionModule } from "primeng/accordion";
-import {BlockUIModule} from 'primeng/blockui';
+import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DividerModule } from "primeng/divider";
 import { CalendarModule } from 'primeng/calendar';
@@ -75,7 +75,7 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         ConfirmPopupModule,
         RippleModule,
         TreeTableModule,
-        TreeModule, 
+        TreeModule,
         ProgressBarModule,
         RadioButtonModule,
         FloatLabelModule,
@@ -91,22 +91,22 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         DatePickerModule,
         AccordionModule,
         BlockUIModule,
-        ProgressBarModule ,
-        DividerModule ,
+        ProgressBarModule,
+        DividerModule,
         CalendarModule,
         InputGroupAddonModule,
-        MenubarModule ,
+        MenubarModule,
         InputOtpModule,
-        BadgeModule ,
+        BadgeModule,
         PopoverModule,
         StepperModule,
         ToggleButton,
         IconField,
         InputIcon,
         FileUpload,
-        Image ,
+        Image,
         PickListModule,
-        PanelMenuModule ,
+        PanelMenuModule,
         DynamicDialogModule
     ],
     exports: [
@@ -121,7 +121,7 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         RippleModule,
         IftaLabelModule,
         MultiSelectModule,
-        TooltipModule, 
+        TooltipModule,
         FloatLabel,
         CardModule,
         TableModule,
@@ -132,7 +132,7 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         ConfirmPopupModule,
         RippleModule,
         TreeTableModule,
-        TreeModule, 
+        TreeModule,
         ProgressBarModule,
         RadioButtonModule,
         FloatLabelModule,
@@ -148,11 +148,11 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         DatePickerModule,
         AccordionModule,
         BlockUIModule,
-        ProgressSpinnerModule ,
-        DividerModule ,
+        ProgressSpinnerModule,
+        DividerModule,
         CalendarModule,
         InputGroupAddonModule,
-        MenubarModule ,
+        MenubarModule,
         InputOtpModule,
         BadgeModule,
         PopoverModule,
@@ -161,9 +161,9 @@ import { DynamicDialogModule } from "primeng/dynamicdialog";
         IconField,
         InputIcon,
         FileUpload,
-        Image ,
+        Image,
         PickListModule,
-        PanelMenuModule ,
+        PanelMenuModule,
         DynamicDialogModule
     ]
 })
